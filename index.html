@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>상하 반전된 사선 반원 패턴</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        // 캔버스 배경색 설정
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // 사선 반원 패턴 그리기
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 2;
+        var radius = 50;
+        var startX = 0;
+        var startY = 0;
+        var endX = canvas.width;
+        var endY = canvas.height;
+
+        ctx.beginPath(); // 새로운 경로 시작
+
+        for (var x = startX; x <= endX; x += radius * 2) {
+            for (var y = startY; y <= endY; y += radius) {
+                ctx.moveTo(x, y);
+                ctx.arc(x, y, radius / 2, Math.PI, 2 * Math.PI, true); // 반원 그리기
+
+                // 작은 반원 연결 및 상하 반전
+                ctx.moveTo(x + radius, y + radius);
+                ctx.arc(x + radius, y + radius, radius / 4, Math.PI, 2 * Math.PI);
+            }
+        }
+
+        ctx.strokeStyle = "gray"; // 선 색상 설정
+        ctx.stroke(); // 경로 렌더링
+
+        ctx.fillStyle = "lightgray"; // 작은 반원 채우기 색상 설정
+        ctx.fill(); // 작은 반원 채우기
+    </script>
+</body>
+</html>
